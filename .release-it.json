@@ -1,0 +1,10 @@
+// https://github.com/release-it/release-it/blob/14.14.3/docs/configuration.md
+// https://github.com/release-it/release-it/blob/14.14.3/config/release-it.json
+{
+  "git": {
+    "commitMessage": "release: v${version} published"
+  },
+  "github": {
+    "release": true
+  }
+}
