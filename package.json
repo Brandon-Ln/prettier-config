@@ -1,6 +1,7 @@
 {
-  "name": "@brandle/prettier-config",
+  "name": "@brandlen/prettier-config",
   "type": "module",
+  "version": "0.0.1",
   "description": "Brandon Leon's personal prettier config",
   "main": "src/index.cjs",
   "module": "src/index.js",
