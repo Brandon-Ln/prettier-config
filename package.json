@@ -1,0 +1,34 @@
+{
+  "name": "@brandle/prettier-config",
+  "type": "module",
+  "description": "Brandon Leon's personal prettier config",
+  "main": "src/index.cjs",
+  "module": "src/index.js",
+  "packageManager": "pnpm@8.0.0",
+  "exports": {
+    ".": {
+      "import": "./src/index.js",
+      "require": "./src/index.cjs"
+    }
+  },
+  "scripts": {
+    "lint": "prettier src/ -w --cache",
+    "release": ""
+  },
+  "peerDependencies": {
+    "prettier": "^2.0.0 || ^3.0.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.2.5"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "keywords": [
+    "JavaScript Standard Style",
+    "style",
+    "prettier",
+    "prettierconfig",
+    "prettier-config"
+  ]
+}
