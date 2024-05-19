@@ -2,6 +2,7 @@
   "name": "@brandlen/prettier-config",
   "type": "module",
   "version": "0.1.1",
+  "author": "Brandon Leon <https://github.com/Brandon-Ln>",
   "description": "Brandon Leon's personal prettier config",
   "main": "src/index.cjs",
   "module": "src/index.js",
@@ -17,7 +18,7 @@
   ],
   "scripts": {
     "lint": "prettier src/ -w --cache",
-    "release": "release-it --dry-run && release-it"
+    "release": "release-it --dry-run --no-github.release && release-it"
   },
   "peerDependencies": {
     "prettier": "^2.0.0 || ^3.0.0"
@@ -38,5 +39,10 @@
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Brandon-Ln/prettier-config.git"
+  },
+  "homepage": "https://github.com/Brandon-Ln/prettier-config#readme"
 }
