@@ -1,7 +1,7 @@
 {
   "name": "@brandlen/prettier-config",
   "type": "module",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Brandon Leon <https://github.com/Brandon-Ln>",
   "description": "Brandon Leon's personal prettier config",
   "main": "src/index.cjs",
