@@ -1,0 +1,22 @@
+# Keep the dependency graph reproducible without formatting generated lockfiles.
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+bun.lockb
+
+node_modules/
+.pnpm-store/
+.cache/
+*.tsbuildinfo
+
+dist/
+build/
+coverage/
+.next/
+.nuxt/
+.output/
+.vite/
+
+*.min.js
+*.min.css
+*.map

@@ -1,0 +1,69 @@
+{
+  "name": "@brandle/prettier-config",
+  "version": "0.0.0",
+  "description": "Personal, all-in-one Prettier configuration for JS community projects.",
+  "keywords": [
+    "prettier",
+    "prettierconfig",
+    "config",
+    "formatting"
+  ],
+  "license": "MIT",
+  "author": "Brandon Leon",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    }
+  },
+  "types": "./index.d.ts",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "editorconfig",
+    "ignore",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brandon-Ln/prettier-config.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Brandon-Ln/prettier-config/issues"
+  },
+  "homepage": "https://github.com/Brandon-Ln/prettier-config#readme",
+  "packageManager": "pnpm@10.16.1",
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "lint": "pnpm run format:check && pnpm run package:check",
+    "package:check": "publint",
+    "hooks:install": "simple-git-hooks",
+    "test": "node --test",
+    "pack:check": "node scripts/pack-check.mjs",
+    "verify": "pnpm run lint && pnpm run test && pnpm run pack:check",
+    "prepublishOnly": "node scripts/assert-publish-context.mjs"
+  },
+  "peerDependencies": {
+    "prettier": ">=3.0.0 <4"
+  },
+  "simple-git-hooks": {
+    "commit-msg": "pnpm exec commitlint --edit $1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "prettier": "^3.6.2",
+    "publint": "^0.3.12",
+    "simple-git-hooks": "^2.13.1"
+  }
+}

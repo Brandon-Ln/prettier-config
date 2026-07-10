@@ -1,0 +1,15 @@
+# Local dependencies and package-manager state
+node_modules/
+.pnpm-store/
+.pnpm-debug.log*
+
+# Other package managers are not used by this pnpm repository.
+package-lock.json
+yarn.lock
+bun.lockb
+
+# Local files
+.DS_Store
+.env
+.env.*
+npm-debug.log*

@@ -1,0 +1,25 @@
+# Dependency lockfiles
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+bun.lockb
+
+# Dependencies and caches
+node_modules/
+.pnpm-store/
+.cache/
+*.tsbuildinfo
+
+# Generated artifacts
+dist/
+build/
+coverage/
+.next/
+.nuxt/
+.output/
+.vite/
+
+# Generated assets
+*.min.js
+*.min.css
+*.map
