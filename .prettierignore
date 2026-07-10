@@ -20,3 +20,5 @@ coverage/
 *.min.js
 *.min.css
 *.map
+
+CHANGELOG.md
