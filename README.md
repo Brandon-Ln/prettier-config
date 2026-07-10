@@ -1,4 +1,4 @@
-# @brandle/prettier-config
+# @brandlen/prettier-config
 
 个人使用的、面向 Web 项目的共享 [Prettier](https://prettier.io/) 配置。
 
@@ -7,14 +7,14 @@
 ## 安装
 
 ```bash
-pnpm add -D prettier @brandle/prettier-config
+pnpm add -D prettier @brandlen/prettier-config
 ```
 
 在项目的 `package.json` 中引用：
 
 ```json
 {
-  "prettier": "@brandle/prettier-config",
+  "prettier": "@brandlen/prettier-config",
   "scripts": {
     "format": "prettier . --write",
     "format:check": "prettier . --check"
@@ -25,7 +25,7 @@ pnpm add -D prettier @brandle/prettier-config
 若项目需要个别覆盖，使用 ESM 配置文件：
 
 ```js
-import base from '@brandle/prettier-config'
+import base from '@brandlen/prettier-config'
 
 /** @type {import('prettier').Config} */
 export default {
@@ -44,7 +44,7 @@ export default {
 可将包内的 `editorconfig` 作为项目根目录的 `.editorconfig` 起点：
 
 ```bash
-cp node_modules/@brandle/prettier-config/editorconfig .editorconfig
+cp node_modules/@brandlen/prettier-config/editorconfig .editorconfig
 ```
 
 ```ini
@@ -68,7 +68,7 @@ trim_trailing_whitespace = false
 Prettier 会自动读取项目根目录的 `.gitignore` 与 `.prettierignore`。为使 CLI、CI 和编辑器都遵循同一规则，请将本包的 `ignore` 文件复制为消费者项目根目录的 `.prettierignore`，再追加项目专属规则：
 
 ```bash
-cp node_modules/@brandle/prettier-config/ignore .prettierignore
+cp node_modules/@brandlen/prettier-config/ignore .prettierignore
 ```
 
 模板默认忽略各包管理器 lockfile、依赖目录、构建产物、缓存、source map 和压缩文件。不会通过安装脚本自动修改你的项目。

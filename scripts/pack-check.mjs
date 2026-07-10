@@ -10,7 +10,7 @@ const execFile = promisify(execFileCallback)
 const root = new URL('..', import.meta.url)
 const rootPath = new URL('.', root).pathname
 const temporaryDirectory = await mkdtemp(
-  join(tmpdir(), 'brandle-prettier-config-'),
+  join(tmpdir(), 'brandlen-prettier-config-'),
 )
 
 try {
@@ -44,7 +44,7 @@ try {
 
   await writeFile(
     join(fixtureDirectory, 'prettier.config.mjs'),
-    "import config from '@brandle/prettier-config'\n\nexport default config\n",
+    "import config from '@brandlen/prettier-config'\n\nexport default config\n",
   )
   await writeFile(
     join(fixtureDirectory, 'example.ts'),

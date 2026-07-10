@@ -10,7 +10,7 @@
 
 npm Trusted Publishing 必须在 npm 上已经存在该包后才能配置。因此首次发布仅执行以下一次：
 
-1. 创建一个短期、细粒度的 npm automation token，仅授予发布 `@brandle/prettier-config` 的权限。
+1. 创建一个短期、细粒度的 npm automation token，仅授予发布 `@brandlen/prettier-config` 的权限。
 2. 将它保存为 GitHub `npm` Environment 中名为 `NPM_TOKEN` 的 secret。
 3. Release Please 创建对应的 `vX.Y.Z` tag 后，从 `main` 手动运行 `Publish package`。
 4. 在 npm 包设置中配置 Trusted Publisher：选择 GitHub Actions，owner 填 `Brandon-Ln`，repository 填 `prettier-config`，workflow 填 `publish.yml`，environment 填 `npm`，允许操作选择 `npm publish`。
