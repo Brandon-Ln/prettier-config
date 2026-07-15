@@ -57,7 +57,7 @@ Prettier reads `.gitignore` and `.prettierignore` from the project root automati
 
 ## Development and releases
 
-Maintainers may develop directly on `main`; pull requests are optional for collaboration. Node 20.19 or later is required to run the Bumpp-powered release command. Before committing, run:
+Node 20.19 or later is required to run the Bumpp-powered release command. Before committing, run:
 
 ```bash
 corepack enable
@@ -73,6 +73,4 @@ To release, start from an up-to-date, clean `main` branch and run:
 pnpm release
 ```
 
-The interactive command selects the SemVer version, rebuilds `CHANGELOG.md` from Conventional Commits, runs `pnpm verify`, creates one release commit and a `vX.Y.Z` tag, then pushes both. The tag starts GitHub Actions, which publishes through npm Trusted Publishing and creates an empty GitHub Release page. Do not run `npm publish` manually.
-
-See the [repository setup notes (Chinese)](docs/repository-setup.md) for the required GitHub and npm settings.
+The interactive command selects the SemVer version, rebuilds `CHANGELOG.md` from Conventional Commits, runs `pnpm verify`, creates one release commit and a `vX.Y.Z` tag, then pushes both. Do not run `npm publish` manually.
