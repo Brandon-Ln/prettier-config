@@ -43,37 +43,17 @@ export default {
 
 共享配置将 `printWidth` 固定为 100；`tabWidth`、`useTabs` 与 `endOfLine` 有意不在本包定义，以便 Prettier 读取每个项目自己的 `.editorconfig`。
 
-可将包内的 `editorconfig` 作为项目根目录的 `.editorconfig` 起点：
+在项目根目录生成内置模板：
 
 ```bash
-cp node_modules/@brandlen/prettier-config/editorconfig .editorconfig
+npx @brandlen/prettier-config init
 ```
 
-```ini
-root = true
-
-[*]
-charset = utf-8
-end_of_line = lf
-indent_style = space
-indent_size = 2
-insert_final_newline = true
-max_line_length = 80
-trim_trailing_whitespace = true
-
-[*.md]
-trim_trailing_whitespace = false
-```
+命令会创建 `.prettierignore` 和 `.editorconfig`；若文件已存在则保留原内容，不会覆盖。
 
 ## 忽略文件
 
-Prettier 会自动读取项目根目录的 `.gitignore` 与 `.prettierignore`。为使 CLI、CI 和编辑器都遵循同一规则，请将本包的 `ignore` 文件复制为消费者项目根目录的 `.prettierignore`，再追加项目专属规则：
-
-```bash
-cp node_modules/@brandlen/prettier-config/ignore .prettierignore
-```
-
-模板默认忽略各包管理器 lockfile、依赖目录、构建产物、缓存、source map 和压缩文件。不会通过安装脚本自动修改你的项目。
+Prettier 会自动读取项目根目录的 `.gitignore` 与 `.prettierignore`。模板默认忽略各包管理器 lockfile、依赖目录、构建产物、缓存、source map 和压缩文件；可按项目需要追加规则。
 
 ## 开发与发布
 

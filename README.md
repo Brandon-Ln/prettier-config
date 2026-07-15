@@ -43,37 +43,17 @@ export default {
 
 The shared config fixes `printWidth` at 100. `tabWidth`, `useTabs`, and `endOfLine` are intentionally left to each project's `.editorconfig`.
 
-Use the bundled `editorconfig` as a starting point for your project root:
+Generate both bundled templates in your project root:
 
 ```bash
-cp node_modules/@brandlen/prettier-config/editorconfig .editorconfig
+npx @brandlen/prettier-config init
 ```
 
-```ini
-root = true
-
-[*]
-charset = utf-8
-end_of_line = lf
-indent_style = space
-indent_size = 2
-insert_final_newline = true
-max_line_length = 80
-trim_trailing_whitespace = true
-
-[*.md]
-trim_trailing_whitespace = false
-```
+The command creates `.prettierignore` and `.editorconfig`, and leaves either file unchanged when it already exists.
 
 ## Ignored files
 
-Prettier reads `.gitignore` and `.prettierignore` from the project root automatically. To give the CLI, CI, and editor the same exclusions, copy this package's `ignore` file to your project root and then append project-specific patterns:
-
-```bash
-cp node_modules/@brandlen/prettier-config/ignore .prettierignore
-```
-
-The template ignores package-manager lockfiles, dependencies, build output, caches, source maps, and minified files. It never changes consumer projects during installation.
+Prettier reads `.gitignore` and `.prettierignore` from the project root automatically. The template ignores package-manager lockfiles, dependencies, build output, caches, source maps, and minified files; append project-specific patterns as needed.
 
 ## Development and releases
 

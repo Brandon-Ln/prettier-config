@@ -1,10 +1,20 @@
 // @ts-check
 import assert from 'node:assert/strict'
+import { execFile as execFileCallback } from 'node:child_process'
+import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import test from 'node:test'
+import { promisify } from 'node:util'
 
 import prettier from 'prettier'
 
 import config from '../index.js'
+
+const execFile = promisify(execFileCallback)
+const rootDirectory = fileURLToPath(new URL('..', import.meta.url))
+const binPath = fileURLToPath(new URL('../bin.js', import.meta.url))
 
 /**
  * @param {string} source
@@ -62,4 +72,39 @@ test('formats Markdown and embedded TypeScript without an extra plugin', async (
 
   assert.match(output, /const value = \{ label: 'ok' \}/)
   assert.match(output, /A paragraph with \*\*bold\*\* text\./)
+})
+
+test('initializes templates without overwriting existing files', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'brandlen-prettier-config-'))
+
+  try {
+    const { stdout: initialOutput } = await execFile(process.execPath, [binPath, 'init'], {
+      cwd: directory,
+    })
+
+    assert.match(initialOutput, /Created \.prettierignore/)
+    assert.match(initialOutput, /Created \.editorconfig/)
+    assert.equal(
+      await readFile(join(directory, '.prettierignore'), 'utf8'),
+      await readFile(join(rootDirectory, 'ignore'), 'utf8'),
+    )
+    assert.equal(
+      await readFile(join(directory, '.editorconfig'), 'utf8'),
+      await readFile(join(rootDirectory, 'editorconfig'), 'utf8'),
+    )
+
+    await writeFile(join(directory, '.editorconfig'), 'existing configuration\n')
+
+    const { stdout: repeatedOutput } = await execFile(process.execPath, [binPath, 'init'], {
+      cwd: directory,
+    })
+
+    assert.match(repeatedOutput, /Skipped existing files: \.prettierignore, \.editorconfig/)
+    assert.equal(
+      await readFile(join(directory, '.editorconfig'), 'utf8'),
+      'existing configuration\n',
+    )
+  } finally {
+    await rm(directory, { recursive: true, force: true })
+  }
 })

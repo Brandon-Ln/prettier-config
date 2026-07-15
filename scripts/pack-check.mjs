@@ -1,7 +1,7 @@
 // @ts-check
 import assert from 'node:assert/strict'
 import { execFile as execFileCallback } from 'node:child_process'
-import { mkdir, mkdtemp, readdir, rm, writeFile } from 'node:fs/promises'
+import { access, mkdir, mkdtemp, readdir, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { promisify } from 'node:util'
@@ -37,6 +37,10 @@ try {
     ],
     { cwd: fixtureDirectory },
   )
+
+  await execFile('pnpm', ['exec', 'prettier-config', 'init'], { cwd: fixtureDirectory })
+  await access(join(fixtureDirectory, '.prettierignore'))
+  await access(join(fixtureDirectory, '.editorconfig'))
 
   await writeFile(
     join(fixtureDirectory, 'prettier.config.mjs'),

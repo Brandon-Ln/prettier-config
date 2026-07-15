@@ -18,12 +18,17 @@
     }
   },
   "types": "./index.d.ts",
+  "bin": {
+    "prettier-config": "./bin.js"
+  },
   "files": [
     "index.js",
     "index.d.ts",
     "editorconfig",
     "ignore",
     "README.md",
+    "CHANGELOG.md",
+    "bin.js",
     "LICENSE"
   ],
   "repository": {
