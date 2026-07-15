@@ -1,3 +1,10 @@
+## [1.1.0](https://github.com/Brandon-Ln/prettier-config/compare/v1.0.1...v1.1.0) (2026-07-15)
+
+### Features
+
+* implement initialization command to generate configuration templates ([0da0b5a](https://github.com/Brandon-Ln/prettier-config/commit/0da0b5a0c0965e4b28180ba1176081457587b0ac))
+* update publish workflow and remove deprecated files; add Chinese README ([dfb6801](https://github.com/Brandon-Ln/prettier-config/commit/dfb68014fac1d35cec24b11de37964d8cdf238ea))
+
 # Changelog
 
 ## [1.0.1](https://github.com/Brandon-Ln/prettier-config/compare/v1.0.0...v1.0.1) (2026-07-10)
