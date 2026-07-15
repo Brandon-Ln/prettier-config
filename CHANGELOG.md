@@ -1,3 +1,9 @@
+## [1.1.2](https://github.com/Brandon-Ln/prettier-config/compare/v1.1.1...v1.1.2) (2026-07-15)
+
+### Bug Fixes
+
+* add GH_TOKEN environment variable for GitHub Release step ([1bc8b9a](https://github.com/Brandon-Ln/prettier-config/commit/1bc8b9a357c38604e8f9d2fb7abb02720438bd9c))
+
 ## [1.1.1](https://github.com/Brandon-Ln/prettier-config/compare/v1.1.0...v1.1.1) (2026-07-15)
 
 ## [1.1.0](https://github.com/Brandon-Ln/prettier-config/compare/v1.0.1...v1.1.0) (2026-07-15)
