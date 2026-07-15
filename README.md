@@ -1,16 +1,18 @@
 # @brandlen/prettier-config
 
-个人使用的、面向 Web 项目的共享 [Prettier](https://prettier.io/) 配置。
+English | [简体中文](README.zh-CN.md)
 
-它只使用 Prettier 3 的内置语言支持，因此可直接格式化 JavaScript、TypeScript、Vue SFC、JSON、CSS 与 Markdown；不为这些语言安装额外 parser 或插件。
+A personal, shareable [Prettier](https://prettier.io/) configuration for Web projects.
 
-## 安装
+It only uses Prettier 3 built-in language support, so it formats JavaScript, TypeScript, Vue SFCs, JSON, CSS, and Markdown without additional parsers or plugins.
+
+## Installation
 
 ```bash
 pnpm add -D prettier @brandlen/prettier-config
 ```
 
-在项目的 `package.json` 中引用：
+Reference the package from your project's `package.json`:
 
 ```json
 {
@@ -22,7 +24,7 @@ pnpm add -D prettier @brandlen/prettier-config
 }
 ```
 
-若项目需要个别覆盖，使用 ESM 配置文件：
+For project-specific overrides, use an ESM config file:
 
 ```js
 import base from '@brandlen/prettier-config'
@@ -34,14 +36,14 @@ export default {
 }
 ```
 
-## 固定格式化风格
+## Formatting style
 
-- Markdown 保留作者已有的段落换行；代码块仍按对应的内置 parser 格式化。
-- 不配置 `parser`，由 Prettier 按文件扩展名选择 parser。
+- Markdown preserves existing author line breaks; fenced code blocks still use their built-in parser.
+- The package does not set `parser`; Prettier selects one from each file extension.
 
-`printWidth`、`tabWidth`、`useTabs` 与 `endOfLine` 有意不在本包定义，以便 Prettier 读取每个项目自己的 `.editorconfig`。
+The shared config fixes `printWidth` at 100. `tabWidth`, `useTabs`, and `endOfLine` are intentionally left to each project's `.editorconfig`.
 
-可将包内的 `editorconfig` 作为项目根目录的 `.editorconfig` 起点：
+Use the bundled `editorconfig` as a starting point for your project root:
 
 ```bash
 cp node_modules/@brandlen/prettier-config/editorconfig .editorconfig
@@ -63,26 +65,34 @@ trim_trailing_whitespace = true
 trim_trailing_whitespace = false
 ```
 
-## 忽略文件
+## Ignored files
 
-Prettier 会自动读取项目根目录的 `.gitignore` 与 `.prettierignore`。为使 CLI、CI 和编辑器都遵循同一规则，请将本包的 `ignore` 文件复制为消费者项目根目录的 `.prettierignore`，再追加项目专属规则：
+Prettier reads `.gitignore` and `.prettierignore` from the project root automatically. To give the CLI, CI, and editor the same exclusions, copy this package's `ignore` file to your project root and then append project-specific patterns:
 
 ```bash
 cp node_modules/@brandlen/prettier-config/ignore .prettierignore
 ```
 
-模板默认忽略各包管理器 lockfile、依赖目录、构建产物、缓存、source map 和压缩文件。不会通过安装脚本自动修改你的项目。
+The template ignores package-manager lockfiles, dependencies, build output, caches, source maps, and minified files. It never changes consumer projects during installation.
 
-## 发布与贡献
+## Development and releases
 
-提交和 squash merge 标题使用 [Conventional Commits](https://www.conventionalcommits.org/)；Release Please 将据此创建版本 PR 与 CHANGELOG。
-
-`pnpm install` 会自动安装本项目的 `commit-msg` Git hook。之后每次执行 `git commit`，Commitlint 都会立即校验消息；例如 `feat: add shared config` 有效，`update files` 会被拒绝。CI 仍会在 Pull Request 中再次校验，避免 hook 被跳过。
-
-本仓库没有本地发布命令。`prepublishOnly` 只允许 `Brandon-Ln/prettier-config` 的 `main` 分支中、手动触发的 GitHub Actions 发布工作流执行发布。完整设置见 [docs/repository-setup.md](docs/repository-setup.md)。
+Maintainers may develop directly on `main`; pull requests are optional for collaboration. Node 20.19 or later is required to run the Bumpp-powered release command. Before committing, run:
 
 ```bash
 corepack enable
 pnpm install --frozen-lockfile
 pnpm verify
 ```
+
+`pnpm install` installs a repository-local `commit-msg` hook. Commit messages must follow [Conventional Commits](https://www.conventionalcommits.org/), such as `feat: add shared config`; pull requests receive the same validation in CI.
+
+To release, start from an up-to-date, clean `main` branch and run:
+
+```bash
+pnpm release
+```
+
+The interactive command selects the SemVer version, rebuilds `CHANGELOG.md` from Conventional Commits, runs `pnpm verify`, creates one release commit and a `vX.Y.Z` tag, then pushes both. The tag starts GitHub Actions, which publishes through npm Trusted Publishing and creates an empty GitHub Release page. Do not run `npm publish` manually.
+
+See the [repository setup notes (Chinese)](docs/repository-setup.md) for the required GitHub and npm settings.

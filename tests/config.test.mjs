@@ -19,12 +19,7 @@ test('exports the expected personal style', () => {
   assert.deepEqual(config, {
     semi: false,
     singleQuote: true,
-    jsxSingleQuote: true,
-    trailingComma: 'all',
-    arrowParens: 'always',
-    bracketSpacing: true,
-    bracketSameLine: false,
-    proseWrap: 'preserve',
+    printWidth: 100,
   })
 })
 
@@ -34,10 +29,7 @@ test('formats JavaScript without semicolons and with single quotes', async () =>
     'example.js',
   )
 
-  assert.equal(
-    output,
-    "const message = 'hello'\nconst getUser = (id) => ({ id: id })\n",
-  )
+  assert.equal(output, "const message = 'hello'\nconst getUser = (id) => ({ id: id })\n")
 })
 
 test('formats TypeScript using the inferred parser', async () => {

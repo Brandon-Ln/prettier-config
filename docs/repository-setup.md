@@ -2,26 +2,23 @@
 
 ## GitHub 仓库
 
-1. 创建公开仓库 `Brandon-Ln/prettier-config`，并将默认分支设为 `main`。
-2. 开启 squash merge，并要求 squash 的提交标题符合 Conventional Commits。
-3. 保护 `main`：要求通过 Pull Request 合并、要求 `quality` 检查通过、要求分支保持最新，并禁止直接 push。
+1. 使用公开仓库 `Brandon-Ln/prettier-config`，默认分支为 `main`。
+2. 维护者可以直接推送到 `main`；Pull Request 只在需要协作或审查时使用。
+3. 为 `main` 保留防删除和防强推保护，并允许维护者绕过规则；不要强制 Pull Request 或状态检查门禁。
 
-## 首次发布 npm 包
+`pnpm install` 会通过 `simple-git-hooks` 安装本地 `commit-msg` hook，使用 Commitlint 校验 Conventional Commits。`quality` 工作流会在 `main` push 与 Pull Request 时执行 `pnpm verify`，并在 Pull Request 中再次校验提交信息；直接开发 `main` 由本地 hook 把关。
 
-npm Trusted Publishing 必须在 npm 上已经存在该包后才能配置。因此首次发布仅执行以下一次：
+## npm Trusted Publishing
 
-1. 创建一个短期、细粒度的 npm automation token，仅授予发布 `@brandlen/prettier-config` 的权限。
-2. 将它保存为 GitHub `npm` Environment 中名为 `NPM_TOKEN` 的 secret。
-3. Release Please 创建对应的 `vX.Y.Z` tag 后，从 `main` 手动运行 `Publish package`。
-4. 在 npm 包设置中配置 Trusted Publisher：选择 GitHub Actions，owner 填 `Brandon-Ln`，repository 填 `prettier-config`，workflow 填 `publish.yml`，environment 填 `npm`，允许操作选择 `npm publish`。
-5. 选择 **Require two-factor authentication and disallow tokens**，然后删除 GitHub secret，并撤销首发用的 token。
+在 npm 包设置中配置 Trusted Publisher：选择 GitHub Actions，owner 填 `Brandon-Ln`，repository 填 `prettier-config`，workflow 填 `publish.yml`，environment 填 `npm`，允许操作选择 `npm publish`。
 
-完成首发后，工作流只会使用 OIDC 发布。不要再向仓库添加长期有效的 npm 发布 token。
+发布工作流通过 OIDC 获取短期凭证，不需要长期 npm token。删除遗留的 `NPM_TOKEN` GitHub secret；不要再添加新的发布 token。
 
-## 发布一个新版本
+## 发布新版本
 
-1. 将符合 Conventional Commits 的代码提交合并到 `main`。
-2. 合并 Release Please 自动创建的版本 Pull Request。
-3. 在下一次提交进入 `main` 前，打开 **Actions → Publish package → Run workflow**，选择 `main`，并输入 `publish` 确认。
+1. 使用 Node 20.19 或更高版本，切换到最新的 `main`，并确认工作区干净。
+2. 运行 `pnpm release`，在交互提示中选择 patch、minor 或 major。
+3. 确认后，Bumpp 会根据 Conventional Commits 重建 `CHANGELOG.md`、执行 `pnpm verify`，并将版本文件、锁文件与 changelog 一同写入 `chore(release): vX.Y.Z` 提交，再创建和推送 `vX.Y.Z` tag。
+4. `v*` tag 会自动触发 `Publish package`：验证包、通过 OIDC 发布到 npm，并创建没有说明和附件的同名 GitHub Release。
 
-工作流会拒绝以下情况：仓库不符、分支不符、事件类型不符、提交不对应版本 tag、版本已发布，或质量检查失败。
+不要手动运行 `npm publish`，也不使用 Release Please、版本 Pull Request 或手动触发发布工作流。

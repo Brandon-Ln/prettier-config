@@ -43,27 +43,32 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
+    "changelog": "conventional-changelog --preset conventionalcommits --output-unreleased --infile CHANGELOG.md --outfile CHANGELOG.md",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "lint": "pnpm run format:check && pnpm run package:check",
     "package:check": "publint",
-    "hooks:install": "simple-git-hooks",
+    "bootstrap": "simple-git-hooks",
+    "release": "bumpp",
+    "release:prepare": "pnpm changelog && pnpm verify",
     "test": "node --test",
     "pack:check": "node scripts/pack-check.mjs",
-    "verify": "pnpm run lint && pnpm run test && pnpm run pack:check",
-    "prepublishOnly": "node scripts/assert-publish-context.mjs"
+    "verify": "pnpm run lint && pnpm run test && pnpm run pack:check"
   },
   "peerDependencies": {
     "prettier": ">=3.0.0 <4"
   },
-  "simple-git-hooks": {
-    "commit-msg": "pnpm exec commitlint --edit $1"
-  },
   "devDependencies": {
+    "bumpp": "^11.0.0",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
+    "conventional-changelog": "^8.1.0",
+    "conventional-changelog-conventionalcommits": "^10.2.1",
     "prettier": "^3.6.2",
     "publint": "^0.3.12",
     "simple-git-hooks": "^2.13.1"
+  },
+  "simple-git-hooks": {
+    "commit-msg": "pnpm exec commitlint --edit $1"
   }
 }

@@ -2,12 +2,7 @@
 const config = {
   semi: false,
   singleQuote: true,
-  jsxSingleQuote: true,
-  trailingComma: 'all',
-  arrowParens: 'always',
-  bracketSpacing: true,
-  bracketSameLine: false,
-  proseWrap: 'preserve',
+  printWidth: 100,
 }
 
 export default config

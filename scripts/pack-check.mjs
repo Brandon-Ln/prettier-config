@@ -9,18 +9,14 @@ import { promisify } from 'node:util'
 const execFile = promisify(execFileCallback)
 const root = new URL('..', import.meta.url)
 const rootPath = new URL('.', root).pathname
-const temporaryDirectory = await mkdtemp(
-  join(tmpdir(), 'brandlen-prettier-config-'),
-)
+const temporaryDirectory = await mkdtemp(join(tmpdir(), 'brandlen-prettier-config-'))
 
 try {
   await execFile('pnpm', ['pack', '--pack-destination', temporaryDirectory], {
     cwd: rootPath,
   })
 
-  const archive = (await readdir(temporaryDirectory)).find((file) =>
-    file.endsWith('.tgz'),
-  )
+  const archive = (await readdir(temporaryDirectory)).find((file) => file.endsWith('.tgz'))
   assert.ok(archive, 'pnpm pack did not create a package archive')
 
   const fixtureDirectory = join(temporaryDirectory, 'fixture')
@@ -46,18 +42,9 @@ try {
     join(fixtureDirectory, 'prettier.config.mjs'),
     "import config from '@brandlen/prettier-config'\n\nexport default config\n",
   )
-  await writeFile(
-    join(fixtureDirectory, 'example.ts'),
-    'const greeting="hello"\n',
-  )
+  await writeFile(join(fixtureDirectory, 'example.ts'), 'const greeting="hello"\n')
 
-  const prettierBin = join(
-    rootPath,
-    'node_modules',
-    'prettier',
-    'bin',
-    'prettier.cjs',
-  )
+  const prettierBin = join(rootPath, 'node_modules', 'prettier', 'bin', 'prettier.cjs')
 
   await execFile(process.execPath, [prettierBin, 'example.ts', '--write'], {
     cwd: fixtureDirectory,
