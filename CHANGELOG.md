@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/Brandon-Ln/prettier-config/compare/v1.1.2...v1.1.3) (2026-07-15)
+
+### Features
+
+* add .eslintcache and .prettiercache to .gitignore ([de563a1](https://github.com/Brandon-Ln/prettier-config/commit/de563a1c8756dadf5b1bf48c3a3d8fae5d2e492e))
+* remove max_line_length setting from editorconfig ([289ba20](https://github.com/Brandon-Ln/prettier-config/commit/289ba208c538ba28265d03aef06ffd587771ac12))
+
 ## [1.1.2](https://github.com/Brandon-Ln/prettier-config/compare/v1.1.1...v1.1.2) (2026-07-15)
 
 ### Bug Fixes
